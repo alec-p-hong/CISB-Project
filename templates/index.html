@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment Tutorial 1</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <div class = 'login'>
+	  <h1>Loan Status Prediction</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="Applicant Income" placeholder="Applicant Income (1 - 1000)" required="required" />
+        <input type="text" name="Coapplicant Income" placeholder="Coapplicant Income (1.0 - 100.0)" required="required" />
+		<input type="text" name="Loan Amount" placeholder="Loan Amount (1.0 - 100.0)" required="required" />
+    <input type="text" name="Loan Amount Term" placeholder="Loan Amount Term (1.0 - 100.0)" required="required" />
+    <input type="text" name="Credit History" placeholder="Credit History (Y,N)" required="required" />
+    <input type="text" name="Gender" placeholder="Gender (M, F)" required="required" />
+    <input type="text" name="Married" placeholder="Married (Y, N)" required="required" />
+    <input type="text" name="Dependents" placeholder="Dependents (1, 2, 3+)" required="required" />
+    <input type="text" name="Graduated" placeholder="Graduated (Y, N)" required="required" />
+    <input type="text" name="Self Employed" placeholder="Self Employed (Y, N)" required="required" />
+    <input type="text" name="Property Area Semi-Urban" placeholder="(Y, N)" required="required" />
+    <input type="text" name="Property Area Urban" placeholder="(Y, N)" required="required" />
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict Loan Status</button>
+    </form>
+    <br>
+    <br>
+   {{ prediction_text }}
+  </div>>
+</body>
+</html>
