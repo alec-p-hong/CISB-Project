@@ -8,7 +8,9 @@ import pickle
 #load csv file 
 df = pd.read_csv('./Data/Loan_Approval.csv')
 
-df_cleaned = df.dropna()
+df_unnessary = df.drop(columns=['Loan_ID'])
+
+df_cleaned = df_unnessary.dropna()
 df_encoded = pd.get_dummies(df_cleaned, drop_first= True)
 
 X = df_encoded.drop(columns='Loan_Status_Y')

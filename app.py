@@ -5,11 +5,11 @@ import pickle
 def predictor(AppInc, CoappInc, LoanAmt, LoanAmtTerm, CreditHist, Gender, Married, Dependents, Graduated, SelfEmp, PropertyLocationSU, PropertyLocationU):
     array = []
     #Applicant Income 
-    array.append(AppInc)
+    array.append(int(AppInc))
     #Coapplicant Income
-    array.append(CoappInc)
+    array.append(float(CoappInc))
     #Loan Amount
-    array.append(LoanAmt)
+    array.append(float(LoanAmt))
     #Term of Loan Amount
     array.append(LoanAmtTerm)
     #Credit History
@@ -28,11 +28,11 @@ def predictor(AppInc, CoappInc, LoanAmt, LoanAmtTerm, CreditHist, Gender, Marrie
     else:
         array.append(0)
     #Dependents
-    if Dependents == 1:
+    if int(Dependents) == 1:
         array.extend([1, 0, 0])
-    elif Dependents == 2:
+    elif int(Dependents) == 2:
         array.extend([0, 1, 0])
-    elif Dependents == '3+':
+    elif str(Dependents) == '3+':
         array.extend([0, 0, 1])
     #Education
     if Graduated == 'Y':
@@ -70,13 +70,13 @@ def home():
 @app.route('/predict', methods = ['POST'])
 def predict():
     features = [x for x in request.form.values()]
-    list_features = [np.array(features)]
-    prediction = model.predict(list_features)
+    list = predictor(*features)
+    prediction = model.predict([list])
     if (prediction == 0):
         prediction = 'Not Approved'
     if (prediction == 1):
         prediction = 'Approved'
-    return render_template('index.html', prediction_test = 'Your Loan was {}!'.format(prediction))
+    return render_template('index.html', prediction_text = 'Your Loan was {}!'.format(prediction))
     
 
 if __name__ == '__main__':
